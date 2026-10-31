@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-crm" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff7ed"/>
+      <stop offset="100%" stop-color="#ffedd5"/>
+    </linearGradient>
+    <linearGradient id="tube-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="cream-swirl" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#fed7aa"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="320" height="200" rx="16" fill="url(#bg-crm)"/>
+
+  <!-- Topical Ointment Squeeze Tube -->
+  <g filter="url(#shadow)" transform="translate(70, 35) rotate(-28)">
+    <!-- Octagonal / Ribbed Cap -->
+    <rect x="0" y="30" width="22" height="30" rx="3" fill="#ea580c" stroke="#c2410c" stroke-width="1.2"/>
+    <line x1="6" y1="30" x2="6" y2="60" stroke="#c2410c" stroke-width="1"/>
+    <line x1="12" y1="30" x2="12" y2="60" stroke="#c2410c" stroke-width="1"/>
+    <line x1="18" y1="30" x2="18" y2="60" stroke="#c2410c" stroke-width="1"/>
+
+    <!-- Tube Shoulder -->
+    <polygon points="22,33 40,24 40,66 22,57" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+
+    <!-- Main Tube Body -->
+    <polygon points="40,24 160,14 160,76 40,66" fill="url(#tube-body)" stroke="#cbd5e1" stroke-width="1.5"/>
+
+    <!-- Crimped End of Tube -->
+    <rect x="156" y="10" width="10" height="70" rx="2" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
+    <line x1="159" y1="12" x2="159" y2="78" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2,2"/>
+
+    <!-- Label Banner on Tube -->
+    <polygon points="60,26 130,20 130,70 60,64" fill="#ffedd5" stroke="#fdba74" stroke-width="1"/>
+    <rect x="70" y="33" width="45" height="5" rx="2" fill="#ea580c"/>
+    <rect x="70" y="42" width="35" height="3" rx="1.5" fill="#64748b"/>
+    <rect x="70" y="48" width="40" height="3" rx="1.5" fill="#94a3b8"/>
+    <rect x="70" y="55" width="25" height="4" rx="2" fill="#059669"/>
+  </g>
+
+  <!-- Luscious Cream Swirl in Foreground -->
+  <g filter="url(#shadow)" transform="translate(195, 95)">
+    <!-- Swirl Base -->
+    <path d="M 10,40 C 25,35 60,35 80,45 C 70,55 30,55 10,40 Z" fill="#fdba74" opacity="0.4"/>
+    <!-- Rich 3D Cream Swirl -->
+    <path d="M 20,40 C 20,20 45,15 50,5 C 55,20 85,25 75,40 C 65,48 30,48 20,40 Z" fill="url(#cream-swirl)" stroke="#fed7aa" stroke-width="1.2"/>
+    <path d="M 32,32 C 38,20 52,18 56,12 C 58,22 68,26 62,35 C 52,40 38,38 32,32 Z" fill="#ffffff"/>
+    <circle cx="48" cy="18" r="3" fill="#ffffff"/>
+  </g>
+
+  <!-- Soothing Lotus Petal Accent -->
+  <path d="M 45,130 C 55,115 70,115 80,130 C 70,140 55,140 45,130 Z" fill="#fb923c" opacity="0.4"/>
+</svg>

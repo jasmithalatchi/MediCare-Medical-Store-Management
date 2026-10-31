@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-ton" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0fdf4"/>
+      <stop offset="100%" stop-color="#dcfce7"/>
+    </linearGradient>
+    <linearGradient id="cork" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#92400e"/>
+    </linearGradient>
+    <linearGradient id="elixir-bottle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#15803d"/>
+      <stop offset="50%" stop-color="#166534"/>
+      <stop offset="100%" stop-color="#14532d"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="320" height="200" rx="16" fill="url(#bg-ton)"/>
+
+  <!-- Botanical Leaf Decoration Left -->
+  <g transform="translate(35, 100) rotate(-35)" opacity="0.3">
+    <path d="M 0,0 C 20,-30 40,-10 60,0 C 40,10 20,30 0,0 Z" fill="#16a34a"/>
+    <line x1="0" y1="0" x2="55" y2="0" stroke="#14532d" stroke-width="1.5"/>
+  </g>
+
+  <!-- Tonic Flask Bottle -->
+  <g filter="url(#shadow)" transform="translate(100, 20)">
+    <!-- Cork Stopper -->
+    <polygon points="40,5 60,5 65,22 35,22" fill="url(#cork)" stroke="#78350f" stroke-width="1"/>
+
+    <!-- Neck -->
+    <rect x="38" y="22" width="24" height="20" fill="#166534" stroke="#14532d" stroke-width="1"/>
+    <!-- Collar ring -->
+    <rect x="34" y="38" width="32" height="6" rx="3" fill="#14532d"/>
+
+    <!-- Flask Body -->
+    <path d="M 34,44 L 10,100 C 5,115 5,140 10,150 C 15,160 30,165 50,165 C 70,165 85,160 90,150 C 95,140 95,115 90,100 L 66,44 Z" fill="url(#elixir-bottle)" stroke="#14532d" stroke-width="1.5"/>
+
+    <!-- Vintage Oval Label -->
+    <ellipse cx="50" cy="115" rx="30" ry="24" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <!-- Leaf Icon on label -->
+    <path d="M 50,100 C 60,110 58,122 50,126 C 42,122 40,110 50,100 Z" fill="#15803d"/>
+    <line x1="50" y1="102" x2="50" y2="124" stroke="#ffffff" stroke-width="1.2"/>
+    <rect x="36" y="129" width="28" height="3" rx="1.5" fill="#92400e"/>
+
+    <!-- Glass gloss reflection -->
+    <path d="M 22,105 C 18,115 18,135 22,145" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.3"/>
+  </g>
+
+  <!-- Fresh Green Leaves in Foreground -->
+  <g filter="url(#shadow)" transform="translate(180, 110)">
+    <!-- Leaf 1 -->
+    <path d="M 10,50 C 25,20 60,30 75,50 C 50,55 30,70 10,50 Z" fill="#22c55e" stroke="#15803d" stroke-width="1.2"/>
+    <line x1="12" y1="50" x2="70" y2="50" stroke="#166534" stroke-width="1.2"/>
+    <!-- Leaf 2 (Smaller) -->
+    <path d="M 30,55 C 45,35 70,40 85,55 C 65,60 45,75 30,55 Z" fill="#4ade80" stroke="#15803d" stroke-width="1" opacity="0.9"/>
+
+    <!-- Herbal Droplet -->
+    <path d="M 55,10 C 55,10 47,24 47,30 C 47,35 50,38 55,38 C 60,38 63,35 63,30 C 63,24 55,10 55,10 Z" fill="#16a34a"/>
+    <circle cx="53" cy="28" r="2.5" fill="#ffffff" opacity="0.8"/>
+  </g>
+</svg>

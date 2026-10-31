@@ -1,0 +1,120 @@
+# ==============================================================================
+# MediCare - Root Git Ignore Configuration
+# ==============================================================================
+
+# 1. Dependency Directories (all workspaces and subfolders)
+node_modules/
+**/node_modules/
+
+# 2. Environment Variables & Secret Configuration Files
+# Root and nested .env files
+.env
+**/.env
+*.env
+**/*.env
+
+# Environment-specific files
+.env.*
+**/.env.*
+*.env.*
+**/*.env.*
+.env.local
+.env.development
+.env.test
+.env.production
+.env.staging
+.env.development.local
+.env.test.local
+.env.production.local
+**/.env.local
+**/.env.development
+**/.env.test
+**/.env.production
+**/.env.staging
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+
+# Explicit workspace env files
+backend/.env
+backend/.env.*
+frontend/.env
+frontend/.env.*
+
+# Allow safe .env.example template files
+!.env.example
+!**/.env.example
+!.env.*.example
+!**/.env.*.example
+!backend/.env.example
+!frontend/.env.example
+
+# 3. Production Build & Distribution Folders
+dist/
+dist-ssr/
+build/
+**/dist/
+**/dist-ssr/
+**/build/
+frontend/dist/
+frontend/dist-ssr/
+frontend/build/
+out/
+.next/
+
+# 4. Private Prescription Uploads & User Files
+backend/uploads/**/*
+!backend/uploads/**/
+!backend/uploads/**/.gitkeep
+uploads/**/*
+!uploads/**/
+!uploads/**/.gitkeep
+
+# 5. Application & Runtime Logs
+logs/
+*.log
+**/*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# 6. Temporary Files, Caches & Process IDs
+.tmp/
+.temp/
+*.tmp
+*.temp
+*.pid
+*.seed
+*.pid.lock
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+.turbo/
+.cache/
+
+# 7. Local Database Files & Dumps
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.dump
+*.rdb
+*.bson
+dump/
+data/
+
+# 8. Editor, IDE & Operating System Files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swo
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini

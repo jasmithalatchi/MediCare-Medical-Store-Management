@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-gel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ecfeff"/>
+      <stop offset="100%" stop-color="#cffafe"/>
+    </linearGradient>
+    <linearGradient id="gel-tube" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="50%" stop-color="#0891b2"/>
+      <stop offset="100%" stop-color="#0e7490"/>
+    </linearGradient>
+    <linearGradient id="crystal-drop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a5f3fc"/>
+      <stop offset="50%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="320" height="200" rx="16" fill="url(#bg-gel)"/>
+
+  <!-- Translucent Gel Tube -->
+  <g filter="url(#shadow)" transform="translate(60, 40) rotate(-22)">
+    <!-- Flip Cap -->
+    <rect x="0" y="30" width="22" height="28" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+    <rect x="2" y="38" width="4" height="12" rx="1" fill="#0891b2"/>
+
+    <!-- Shoulder -->
+    <polygon points="22,33 40,22 40,66 22,55" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1"/>
+
+    <!-- Cyan Tube Body -->
+    <polygon points="40,22 165,12 165,76 40,66" fill="url(#gel-tube)" stroke="#0e7490" stroke-width="1.5"/>
+
+    <!-- Crimped End -->
+    <rect x="160" y="8" width="10" height="72" rx="2" fill="#0e7490" stroke="#155e75" stroke-width="1"/>
+
+    <!-- Graphic Waves on Tube -->
+    <path d="M 60,35 Q 90,20 120,40 T 150,30" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.6"/>
+    <path d="M 60,50 Q 90,35 120,55 T 150,45" stroke="#a5f3fc" stroke-width="2.5" fill="none" opacity="0.8"/>
+    <rect x="70" y="52" width="45" height="4" rx="2" fill="#ffffff"/>
+  </g>
+
+  <!-- Cooling Aqua Gel Droplet in Foreground -->
+  <g filter="url(#shadow)" transform="translate(190, 80)">
+    <!-- Water Splash Rings -->
+    <ellipse cx="45" cy="75" rx="35" ry="12" fill="#67e8f9" opacity="0.2" stroke="#06b6d4" stroke-width="1"/>
+    <ellipse cx="45" cy="75" rx="20" ry="7" fill="#a5f3fc" opacity="0.3"/>
+
+    <!-- Translucent Gel Droplet -->
+    <path d="M 45,15 C 45,15 20,45 20,62 C 20,76 31,85 45,85 C 59,85 70,76 70,62 C 70,45 45,15 45,15 Z" fill="url(#crystal-drop)" opacity="0.9"/>
+
+    <!-- Glossy Reflection -->
+    <ellipse cx="36" cy="50" rx="6" ry="14" fill="#ffffff" opacity="0.75" transform="rotate(-18 36 50)"/>
+    <circle cx="54" cy="68" r="3" fill="#ffffff" opacity="0.8"/>
+  </g>
+
+  <!-- Cool Ice Frost Sparkles -->
+  <path d="M 40,50 L 43,56 L 49,58 L 43,60 L 40,66 L 37,60 L 31,58 L 37,56 Z" fill="#06b6d4" opacity="0.8"/>
+  <path d="M 280,45 L 282,50 L 287,52 L 282,54 L 280,59 L 278,54 L 273,52 L 278,50 Z" fill="#0891b2" opacity="0.7"/>
+</svg>
