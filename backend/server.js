@@ -79,15 +79,32 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
 // Static folder for uploaded files
 app.use('/uploads', express.static(uploadsDir));
 
-// Health Check Route
-app.get('/api/health', (req, res) => {
+// Health Check Routes (Accessible via /api/health and /health)
+app.get(['/api/health', '/health'], (req, res) => {
   res.status(200).json({
+    success: true,
+    message: 'MediCare API is running',
     status: 'online',
     service: 'MediCare API Server',
     environment: process.env.NODE_ENV || 'development',
     database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
     uptime: Math.floor(process.uptime()),
     timestamp: new Date().toISOString(),
+  });
+});
+
+// Root Route - Welcome / Status Handler
+app.get('/', (req, res) => {
+  const frontendDistPath = path.resolve(__dirname, '../frontend/dist');
+  if (fs.existsSync(frontendDistPath)) {
+    return res.sendFile(path.resolve(frontendDistPath, 'index.html'));
+  }
+  res.status(200).json({
+    success: true,
+    message: 'MediCare API is running',
+    service: 'MediCare API Server',
+    healthCheck: '/api/health',
+    environment: process.env.NODE_ENV || 'development',
   });
 });
 
