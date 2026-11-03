@@ -124,3 +124,13 @@ npm run dev:frontend
 - **Public:** Browse catalog, search medicines, view categories, filter offers.
 - **Customer:** Authenticated portal for order history, prescription uploads, profile, and wishlist management.
 - **Admin:** Protected portal for medicine catalog CRUD, inventory stock control, order status processing, and business reports.
+
+---
+
+## 🚀 Production Deployment
+
+MediCare is fully pre-configured for production deployment on modern cloud platforms (Render, Vercel, Netlify, Railway, MongoDB Atlas):
+- See the complete beginner-friendly guide in [DEPLOYMENT.md](./DEPLOYMENT.md).
+- Production build command: `npm run build`
+- Production start command: `npm start`
+- Environment templates: `.env.example`, `backend/.env.example`, and `frontend/.env.example`

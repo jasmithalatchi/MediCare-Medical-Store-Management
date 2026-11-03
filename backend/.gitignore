@@ -1,0 +1,9 @@
+# MediCare Backend .gitignore
+node_modules/
+.env
+.env.*
+!.env.example
+logs/
+*.log
+uploads/prescriptions/*
+!uploads/prescriptions/.gitkeep
