@@ -85,7 +85,20 @@ app.use(async (req, res, next) => {
     try {
       await connectDB();
     } catch (err) {
-      // Allow request to continue; controllers and health checks can handle or report state
+      // If DB is disconnected and user calls a data endpoint (not /api/health or /api), return clean 503 message
+      if (
+        req.originalUrl !== '/api' &&
+        req.originalUrl !== '/api/' &&
+        !req.originalUrl.startsWith('/api/health') &&
+        !req.originalUrl.startsWith('/health')
+      ) {
+        return res.status(503).json({
+          success: false,
+          error: 'DATABASE_DISCONNECTED',
+          message:
+            'MongoDB Atlas is not connected. Please ensure MONGO_URI is added in your Vercel Project Environment Variables and 0.0.0.0/0 is whitelisted in MongoDB Atlas Network Access.',
+        });
+      }
     }
   }
   next();

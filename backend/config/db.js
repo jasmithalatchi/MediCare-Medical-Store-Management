@@ -39,7 +39,7 @@ const connectDB = async () => {
   if (!cached.promise) {
     const opts = {
       serverSelectionTimeoutMS: 5000,
-      bufferCommands: false, // Fail fast rather than hanging on queries if DB is unreachable
+      bufferCommands: true,
     };
 
     cached.promise = mongoose
