@@ -10,8 +10,8 @@ You can deploy MediCare in one of two production setups:
 
 | Setup | Description | Best For | Recommended Hosting |
 | :--- | :--- | :--- | :--- |
-| **Option A (Decoupled - Recommended)** | Frontend and Backend deployed as separate, dedicated services. | Scalability, fast CDN delivery, free tier hosting. | **Frontend:** Vercel / Netlify<br>**Backend:** Render / Railway<br>**Database:** MongoDB Atlas |
-| **Option B (Unified Single-Service)** | Backend builds and serves the compiled frontend static assets (`dist`) alongside API routes. | Simplicity, single custom domain, zero CORS configuration needed. | Render Web Service / Railway / DigitalOcean / Heroku / Docker |
+| **Option A (Unified Vercel - Current & Recommended)** | Deploy BOTH React frontend and Express serverless backend on Vercel under the SAME single public domain. | One URL, zero CORS problems, fast serverless scaling, no Render needed. | **Frontend + Backend:** Vercel<br>**Database:** MongoDB Atlas |
+| **Option B (Decoupled Services)** | Frontend and Backend deployed as separate, dedicated services. | Scalability, dedicated long-running background tasks. | **Frontend:** Vercel<br>**Backend:** Render / Railway<br>**Database:** MongoDB Atlas |
 
 ---
 
@@ -127,15 +127,18 @@ MediCare is pre-configured with a `.gitignore` that excludes `.env` files, `node
 3. Select your MediCare repository.
 4. Configure Project Settings:
    - **Framework Preset:** Vite
-   - **Root Directory:** Click **Edit** and choose `frontend`.
+   - **Root Directory:** Ensure this is set to `./` (the root repository directory). If it was previously set to `frontend`, reset it to `./`.
    - **Build Command:** `npm run build`
-   - **Output Directory:** `dist`
-   - **Install Command:** `npm install`
+   - **Output Directory:** `frontend/dist`
 5. **Environment Variables:**
-   - Key: `VITE_API_BASE_URL`
-   - Value: `https://medicare-backend.onrender.com/api` *(your Render backend URL + `/api`)*
+   - `MONGO_URI`: `mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/medicare?retryWrites=true&w=majority` (your MongoDB Atlas connection string)
+   - `JWT_SECRET`: `super_secret_jwt_key_medicare_store_2026`
+   - `NODE_ENV`: `production`
 6. Click **Deploy**.
-7. Once deployed, Vercel gives you a production URL (e.g., `https://medicare-frontend.vercel.app`).
+7. Once deployed, Vercel gives you your single production URL (e.g., `https://your-medicare.vercel.app`).
+   - Both your React frontend and your Node/Express REST API run together on this domain!
+   - API Health Check is accessible at `/api/health`.
+   - Medicine Catalog API is accessible at `/api/products` (and `/api/medicines`).
 8. **Update Backend CORS (`CLIENT_URL`):**
    - Go back to **Render Dashboard** → `medicare-backend` → **Environment**.
    - Update `CLIENT_URL` to:

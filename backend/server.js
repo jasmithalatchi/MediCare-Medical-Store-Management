@@ -25,17 +25,23 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 dotenv.config();
 
 // Connect to Database
-connectDB();
+connectDB().catch((err) => {
+  console.warn('[MongoDB Init Warning]:', err.message);
+});
 
-// Ensure uploads directories exist
+// Ensure uploads directories exist (safely handled for serverless environments)
 const uploadsDir = path.join(__dirname, 'uploads');
 const prescriptionsDir = path.join(uploadsDir, 'prescriptions');
-if (!fs.existsSync(prescriptionsDir)) {
-  fs.mkdirSync(prescriptionsDir, { recursive: true });
+try {
+  if (!fs.existsSync(prescriptionsDir)) {
+    fs.mkdirSync(prescriptionsDir, { recursive: true });
+  }
+} catch (e) {
+  // Read-only filesystem in Vercel serverless environment
 }
 
 // Production-ready CORS Configuration
-const rawClientUrls = process.env.CLIENT_URL || 'http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173';
+const rawClientUrls = process.env.CLIENT_URL || '';
 const allowedOrigins = rawClientUrls
   .split(',')
   .map((url) => url.trim().replace(/\/+$/, ''))
@@ -50,11 +56,12 @@ const corsOptions = {
 
     const normalizedOrigin = origin.replace(/\/+$/, '');
 
-    // Allow wildcard, configured origins, or any localhost in non-production
+    // Allow wildcard, configured origins, any vercel.app domain, or any localhost
     if (
       allowedOrigins.includes('*') ||
       allowedOrigins.includes(normalizedOrigin) ||
-      (process.env.NODE_ENV !== 'production' && /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin))
+      /\.vercel\.app$/.test(normalizedOrigin) ||
+      /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)
     ) {
       return callback(null, true);
     }
@@ -72,6 +79,18 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Database connection middleware for warm/cold serverless invocations
+app.use(async (req, res, next) => {
+  if (req.originalUrl.startsWith('/api') || req.originalUrl.startsWith('/health')) {
+    try {
+      await connectDB();
+    } catch (err) {
+      // Allow request to continue; controllers and health checks can handle or report state
+    }
+  }
+  next();
+});
+
 if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
   app.use(morgan('dev'));
 }
@@ -81,19 +100,45 @@ app.use('/uploads', express.static(uploadsDir));
 
 // Health Check Routes (Accessible via /api/health and /health)
 app.get(['/api/health', '/health'], (req, res) => {
+  const isConnected = mongoose.connection.readyState === 1;
   res.status(200).json({
     success: true,
     message: 'MediCare API is running',
     status: 'online',
     service: 'MediCare API Server',
-    environment: process.env.NODE_ENV || 'development',
-    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    environment: process.env.NODE_ENV || (process.env.VERCEL ? 'production' : 'development'),
+    database: isConnected ? 'connected' : 'disconnected',
+    databaseDetails: {
+      status: isConnected ? 'connected' : 'disconnected',
+      readyState: mongoose.connection.readyState,
+      host: isConnected ? mongoose.connection.host : undefined,
+      databaseName: isConnected ? mongoose.connection.name : undefined,
+    },
     uptime: Math.floor(process.uptime()),
     timestamp: new Date().toISOString(),
   });
 });
 
-// Root Route - Welcome / Status Handler
+// API Root Status & Route Directory
+app.get(['/api', '/api/status'], (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'MediCare REST API is running',
+    version: '1.0.0',
+    endpoints: {
+      health: '/api/health',
+      auth: '/api/auth',
+      medicines: '/api/medicines',
+      products: '/api/products',
+      orders: '/api/orders',
+      inventory: '/api/inventory',
+      users: '/api/users',
+      prescriptions: '/api/prescriptions',
+    },
+  });
+});
+
+// Root Route - Welcome / Status Handler (fallback when serving outside static host)
 app.get('/', (req, res) => {
   const frontendDistPath = path.resolve(__dirname, '../frontend/dist');
   if (fs.existsSync(frontendDistPath)) {
@@ -108,13 +153,13 @@ app.get('/', (req, res) => {
   });
 });
 
-// Mount API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/medicines', medicineRoutes);
-app.use('/api/orders', orderRoutes);
-app.use('/api/inventory', inventoryRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/prescriptions', prescriptionRoutes);
+// Mount API Routes (supports both /api/* and /* for Vercel Serverless Function rewrites)
+app.use(['/api/auth', '/auth'], authRoutes);
+app.use(['/api/medicines', '/medicines', '/api/products', '/products'], medicineRoutes);
+app.use(['/api/orders', '/orders'], orderRoutes);
+app.use(['/api/inventory', '/inventory'], inventoryRoutes);
+app.use(['/api/users', '/users'], userRoutes);
+app.use(['/api/prescriptions', '/prescriptions'], prescriptionRoutes);
 
 // In Production: Serve Built Frontend static assets if available (Unified fullstack deployment)
 const frontendDistPath = path.resolve(__dirname, '../frontend/dist');
@@ -134,9 +179,9 @@ if (fs.existsSync(frontendDistPath)) {
 app.use(notFound);
 app.use(errorHandler);
 
-// Start Server
+// Start Server locally if not running in serverless / Vercel
 const PORT = process.env.PORT || 5000;
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`[MediCare API] Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
   });

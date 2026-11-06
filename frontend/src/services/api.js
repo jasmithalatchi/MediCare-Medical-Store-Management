@@ -2,11 +2,25 @@ import axios from 'axios';
 
 /**
  * Resolve base URL for REST API
- * Handles both local development and production environments,
- * ensuring trailing slashes and the '/api' prefix are consistently formatted.
+ * In production with unified hosting, use relative '/api' on the same public domain.
+ * Strips obsolete localhost and Render URLs in production so cloud deployments connect reliably.
  */
 const getBaseURL = () => {
   const envUrl = import.meta.env.VITE_API_BASE_URL;
+
+  // In production builds, default to relative '/api' unless a valid external custom domain is explicitly given
+  if (import.meta.env.PROD) {
+    if (
+      !envUrl ||
+      envUrl.includes('localhost') ||
+      envUrl.includes('127.0.0.1') ||
+      envUrl.includes('onrender.com') ||
+      envUrl === '/api'
+    ) {
+      return '/api';
+    }
+  }
+
   if (envUrl && typeof envUrl === 'string' && envUrl.trim() !== '') {
     let clean = envUrl.trim().replace(/\/+$/, '');
     if (!clean.endsWith('/api')) {
@@ -14,8 +28,8 @@ const getBaseURL = () => {
     }
     return clean;
   }
-  // In production with unified hosting, use relative '/api'
-  // In local development, default to Express server on port 5000
+
+  // Fallback: relative '/api' in production, localhost in development
   return import.meta.env.PROD ? '/api' : 'http://localhost:5000/api';
 };
 
