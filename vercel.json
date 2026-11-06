@@ -1,7 +1,6 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "frontend/dist",
   "rewrites": [
     {
       "source": "/api",
@@ -12,8 +11,24 @@
       "destination": "/api/index.js"
     },
     {
+      "source": "/health",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/assets/(.*)",
+      "destination": "/frontend/dist/assets/$1"
+    },
+    {
+      "source": "/images/(.*)",
+      "destination": "/frontend/dist/images/$1"
+    },
+    {
+      "source": "/icons/(.*)",
+      "destination": "/frontend/dist/icons/$1"
+    },
+    {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/frontend/dist/index.html"
     }
   ]
 }
