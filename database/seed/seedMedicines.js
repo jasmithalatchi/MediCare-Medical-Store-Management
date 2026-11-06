@@ -425,6 +425,36 @@ const rawCatalog = [
   createProduct({ name: 'Infra-Temp Pediatric Forehead Thermometer', genericName: 'Non-Contact Instant Infrared Sensor', category: 'Baby Care', dosageForm: 'Device', strength: '1 Unit', price: 799, originalPrice: 1199, stockQuantity: 95, brandIdx: 7 }),
   createProduct({ name: 'Baby Fabric Liquid Wash Eco-Friendly', genericName: 'Plant Enzyme Hypoallergenic Detergent 500ml', category: 'Baby Care', dosageForm: 'Liquid Bottle', strength: '500ml', price: 249, originalPrice: 299, stockQuantity: 210, brandIdx: 14 }),
   createProduct({ name: 'Anti-Mosquito Roll-On Natural 50ml', genericName: 'Citronella & Lemongrass Essential Shield', category: 'Baby Care', dosageForm: 'Roll-on', strength: '50ml', price: 110, originalPrice: 135, stockQuantity: 340, brandIdx: 10 }),
+
+  // ==================== 14. CERELAC FLAVOURS & BABY ESSENTIALS ====================
+  createProduct({ name: 'Nestle Cerelac Baby Cereal Wheat Apple 300g', genericName: 'Fortified Infant Cereal with Iron & 16 Nutrients', category: 'Baby Care', dosageForm: 'Powder Tin', strength: '300g', price: 295, originalPrice: 320, stockQuantity: 280, brandIdx: 13 }),
+  createProduct({ name: 'Nestle Cerelac Rice Infant Cereal 300g', genericName: 'Single Grain Gentle Starter Cereal Stage 1', category: 'Baby Care', dosageForm: 'Powder Tin', strength: '300g', price: 285, originalPrice: 310, stockQuantity: 240, brandIdx: 13 }),
+  createProduct({ name: 'Nestle Cerelac Wheat Mixed Fruit 300g', genericName: 'Multi-Fruit & Cereal Stage 2 with Zinc & Vitamin C', category: 'Baby Care', dosageForm: 'Powder Tin', strength: '300g', price: 310, originalPrice: 340, stockQuantity: 260, brandIdx: 13 }),
+  createProduct({ name: 'Nestle Cerelac 4 Cereals Multi-Grain 300g', genericName: 'Wheat, Rice, Barley & Corn Stage 3 Baby Food', category: 'Baby Care', dosageForm: 'Powder Tin', strength: '300g', price: 335, originalPrice: 365, stockQuantity: 220, brandIdx: 13 }),
+  createProduct({ name: 'Nestle Cerelac Ragi Apple Infant Food 300g', genericName: 'Iron Rich Traditional Ragi Cereal for 6+ Months', category: 'Baby Care', dosageForm: 'Powder Tin', strength: '300g', price: 299, originalPrice: 330, stockQuantity: 210, brandIdx: 13 }),
+  createProduct({ name: 'Pampers All-Round Protection Diaper Pants Medium 54s', genericName: 'Anti-Rash Lotion Magic Gel Diaper Pants', category: 'Baby Care', dosageForm: 'Pants Pack', strength: '54 Diapers', price: 799, originalPrice: 999, stockQuantity: 320, brandIdx: 13 }),
+  createProduct({ name: 'Huggies Wonder Pants Baby Diaper Large 50s', genericName: 'Bubble Bed Absorption Technology 50 Count', category: 'Baby Care', dosageForm: 'Pants Pack', strength: '50 Diapers', price: 749, originalPrice: 949, stockQuantity: 290, brandIdx: 13 }),
+  createProduct({ name: 'MamyPoko Extra Absorb Diaper Pants Small 44s', genericName: '12-Hour Cross Core Absorbent Diapers', category: 'Baby Care', dosageForm: 'Pants Pack', strength: '44 Diapers', price: 549, originalPrice: 699, stockQuantity: 310, brandIdx: 13 }),
+  createProduct({ name: 'Himalaya Gentle Baby Soap with Olive Oil 75g', genericName: 'Infused with Olive & Almond Oil pH Balanced', category: 'Baby Care', dosageForm: 'Soap Bar', strength: '75g', price: 65, originalPrice: 75, stockQuantity: 450, brandIdx: 10 }),
+  createProduct({ name: 'Sebamed Baby Cleansing Bar pH 5.5 100g', genericName: '100% Soap & Alkali-Free Sensitive Skin Bar', category: 'Baby Care', dosageForm: 'Cleansing Bar', strength: '100g', price: 230, originalPrice: 260, stockQuantity: 210, brandIdx: 14 }),
+  createProduct({ name: 'Aveeno Baby Daily Moisture Lotion 227ml', genericName: 'Natural Colloidal Oatmeal Dimethicone Lotion', category: 'Baby Care', dosageForm: 'Lotion Pump', strength: '227ml', price: 699, originalPrice: 850, stockQuantity: 175, brandIdx: 13 }),
+
+  // ==================== 15. MEDICAL EQUIPMENT & HEALTHCARE SUPPLIES ====================
+  createProduct({ name: 'Omron HEM 7120 Fully Automatic Digital BP Monitor', genericName: 'Oscillometric Upper Arm Blood Pressure Device', category: 'Medical Equipment', dosageForm: 'Device', strength: '1 Unit', price: 1899, originalPrice: 2450, stockQuantity: 120, brandIdx: 7 }),
+  createProduct({ name: 'Dr. Morepen PO-09 Fingertip Pulse Oximeter', genericName: 'Digital Blood Oxygen SpO2 & Heart Rate Sensor', category: 'Medical Equipment', dosageForm: 'Device', strength: '1 Unit', price: 849, originalPrice: 1299, stockQuantity: 180, brandIdx: 5 }),
+  createProduct({ name: 'Accu-Chek Active Blood Glucose Monitor with 10 Strips', genericName: 'Diabetes Glucometer Blood Sugar Testing Kit', category: 'Medical Equipment', dosageForm: 'Kit', strength: '1 Kit', price: 1199, originalPrice: 1599, stockQuantity: 160, brandIdx: 6 }),
+  createProduct({ name: 'Beurer FT-09 Waterproof Clinical Digital Thermometer', genericName: '10-Second Fast Oral & Underarm Temp Measurement', category: 'Medical Equipment', dosageForm: 'Device', strength: '1 Unit', price: 249, originalPrice: 350, stockQuantity: 280, brandIdx: 7 }),
+  createProduct({ name: 'Flamingo Orthopedic Heat Belt Heating Pad Large', genericName: '3-Temperature Electric Heating Belt for Back Pain', category: 'Healthcare Essentials', dosageForm: 'Therapy Belt', strength: '1 Unit', price: 799, originalPrice: 1050, stockQuantity: 140, brandIdx: 4 }),
+  createProduct({ name: 'Dettol Antiseptic Disinfectant Fluid 550ml', genericName: 'Chloroxylenol 4.8% First Aid & Hygiene Liquid', category: 'Healthcare Essentials', dosageForm: 'Liquid Bottle', strength: '550ml', price: 215, originalPrice: 240, stockQuantity: 420, brandIdx: 1 }),
+  createProduct({ name: '3M Nexcare Micropore Hypoallergenic Medical Tape 1 inch', genericName: 'Gentle Breathable Surgical Adhesive Paper Tape', category: 'First Aid', dosageForm: 'Tape Roll', strength: '9.1m Roll', price: 85, originalPrice: 110, stockQuantity: 360, brandIdx: 0 }),
+  createProduct({ name: 'Hansaplast Elastic Adhesive Fabric Bandage 20s', genericName: 'Breathable Wound Plaster with Silver Healing Pad', category: 'First Aid', dosageForm: 'Plaster Strips', strength: '20 Strips', price: 65, originalPrice: 80, stockQuantity: 500, brandIdx: 2 }),
+  createProduct({ name: 'Electral ORS Apple Flavour Sachet 21.8g', genericName: 'WHO Recommended Formula Oral Electrolyte Salt', category: 'ORS and Hydration', dosageForm: 'Powder Sachet', strength: '21.8g', price: 22, originalPrice: 25, stockQuantity: 600, brandIdx: 4 }),
+  createProduct({ name: 'Walyte ORS Ready Drink Orange 200ml', genericName: 'Ready-to-Drink Balanced Electrolyte & Energy Solution', category: 'ORS and Hydration', dosageForm: 'Tetra Pack', strength: '200ml', price: 38, originalPrice: 45, stockQuantity: 390, brandIdx: 0 }),
+  createProduct({ name: 'Kama Ayurveda Pure Rosewater Facial Mist 100ml', genericName: 'Steam Distilled Kannauj Rose Petal Hydrosol', category: 'Skin Care', dosageForm: 'Spray Bottle', strength: '100ml', price: 425, originalPrice: 495, stockQuantity: 190, brandIdx: 10 }),
+  createProduct({ name: 'Minimalist 10% Vitamin C Facial Glow Serum 30ml', genericName: 'Ethyl Ascorbic Acid + Centella Soothing Extract', category: 'Serums', dosageForm: 'Dropper Bottle', strength: '30ml', price: 649, originalPrice: 699, stockQuantity: 210, brandIdx: 8 }),
+  createProduct({ name: 'The Derma Co 2% Salicylic Acid Face Serum 30ml', genericName: 'Encapsulated Salicylic Acid & Witch Hazel Blemish Care', category: 'Serums', dosageForm: 'Dropper Bottle', strength: '30ml', price: 475, originalPrice: 499, stockQuantity: 230, brandIdx: 9 }),
+  createProduct({ name: 'Baidyanath Shankhapushpi Brain & Memory Tonic 450ml', genericName: 'Convolvulus Pluricaulis & Brahmi Herbal Memory Tonic', category: 'Syrups and Tonics', dosageForm: 'Syrup Bottle', strength: '450ml', price: 185, originalPrice: 215, stockQuantity: 270, brandIdx: 11 }),
+  createProduct({ name: 'Zandu Kesari Jivan Chyawanprash Saffron & Pearl 450g', genericName: 'Ayurvedic Revitalizer with Pure Kesar & Amla', category: 'Vitamins and Supplements', dosageForm: 'Chyawanprash Jar', strength: '450g', price: 395, originalPrice: 460, stockQuantity: 310, brandIdx: 10 }),
 ];
 
 const seedDatabase = async () => {
@@ -495,4 +525,8 @@ const seedDatabase = async () => {
   }
 };
 
-seedDatabase();
+export { rawCatalog, seedDatabase };
+
+if (process.argv[1] && process.argv[1].includes('seedMedicines.js')) {
+  seedDatabase();
+}

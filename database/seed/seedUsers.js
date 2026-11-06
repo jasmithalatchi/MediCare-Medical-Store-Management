@@ -105,4 +105,8 @@ const seedUsers = async () => {
   }
 };
 
-seedUsers();
+export { seedUsers };
+
+if (process.argv[1] && process.argv[1].includes('seedUsers.js')) {
+  seedUsers();
+}

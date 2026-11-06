@@ -30,10 +30,17 @@ const Home = () => {
   const categories = [
     { title: 'Tablets', icon: Pill, count: '25+' },
     { title: 'Capsules', icon: HeartPulse, count: '25+' },
-    { title: 'Syrups', icon: Droplets, count: '25+' },
-    { title: 'Baby Care', icon: Baby, count: '25+' },
-    { title: 'Vitamins', icon: Sparkles, count: '25+' },
+    { title: 'Syrups and Tonics', icon: Droplets, count: '50+' },
+    { title: 'Injections', icon: HeartPulse, count: '25+' },
+    { title: 'Serums', icon: Droplets, count: '25+' },
+    { title: 'Baby Care', icon: Baby, count: '35+' },
+    { title: 'Personal Care', icon: Sparkles, count: '25+' },
+    { title: 'Skin Care', icon: Sparkles, count: '25+' },
+    { title: 'Vitamins and Supplements', icon: Sparkles, count: '50+' },
     { title: 'First Aid', icon: Stethoscope, count: '25+' },
+    { title: 'Medical Equipment', icon: Stethoscope, count: '10+' },
+    { title: 'ORS and Hydration', icon: Droplets, count: '25+' },
+    { title: 'Healthcare Essentials', icon: ShieldCheck, count: '20+' },
   ];
 
   return (

@@ -1,4 +1,5 @@
 import Medicine from '../models/Medicine.js';
+import { seedDatabase } from './seedController.js';
 
 /**
  * @desc    Fetch all medicines with search, category filtering, sorting & pagination
@@ -24,10 +25,27 @@ export const getMedicines = async (req, res, next) => {
         }
       : {};
 
-    // Category filter
-    const category = req.query.category && req.query.category !== 'All'
-      ? { category: req.query.category }
-      : {};
+    // Flexible category filter supporting composite and standard categories
+    let category = {};
+    if (req.query.category && req.query.category !== 'All') {
+      const cat = req.query.category.trim();
+      const lower = cat.toLowerCase();
+      if (lower === 'syrups and tonics' || lower === 'syrups' || lower === 'tonics') {
+        category = { category: { $in: ['Syrups', 'Tonics', 'Syrups and Tonics'] } };
+      } else if (lower === 'vitamins and supplements' || lower === 'vitamins' || lower === 'supplements') {
+        category = { category: { $in: ['Vitamins', 'Supplements', 'Vitamins and Supplements'] } };
+      } else if (lower === 'ors and hydration' || lower === 'ors') {
+        category = { category: { $in: ['ORS', 'ORS and Hydration'] } };
+      } else if (lower === 'personal care') {
+        category = { category: { $in: ['Personal Care', 'Creams', 'Gels'] } };
+      } else if (lower === 'skin care') {
+        category = { category: { $in: ['Skin Care', 'Creams', 'Gels', 'Serums'] } };
+      } else if (lower === 'medical equipment' || lower === 'healthcare essentials') {
+        category = { category: { $in: ['Medical Equipment', 'Healthcare Essentials', 'First Aid'] } };
+      } else {
+        category = { category: { $regex: new RegExp(`^${cat}$`, 'i') } };
+      }
+    }
 
     // Availability filter (optional)
     const availability = req.query.inStock === 'true'
@@ -51,7 +69,18 @@ export const getMedicines = async (req, res, next) => {
       sortOptions = { discountPercentage: -1 };
     }
 
-    const count = await Medicine.countDocuments(filter);
+    let count = await Medicine.countDocuments(filter);
+
+    // Auto-seed demo medicines if database has 0 products
+    if (count === 0 && !req.query.keyword && (!req.query.category || req.query.category === 'All')) {
+      try {
+        await seedDatabase();
+        count = await Medicine.countDocuments(filter);
+      } catch (seedErr) {
+        // Continue if seed fails
+      }
+    }
+
     const medicines = await Medicine.find(filter)
       .limit(pageSize)
       .skip(pageSize * (page - 1))
@@ -72,15 +101,40 @@ export const getMedicines = async (req, res, next) => {
 
 /**
  * @desc    Fetch distinct medicine categories
- * @route   GET /api/medicines/categories
+ * @route   GET /api/medicines/categories or GET /api/categories
  * @access  Public
  */
 export const getCategories = async (req, res, next) => {
   try {
-    const categories = await Medicine.distinct('category');
+    const intendedCategories = [
+      'Tablets',
+      'Capsules',
+      'Syrups and Tonics',
+      'Injections',
+      'Serums',
+      'Baby Care',
+      'Personal Care',
+      'Skin Care',
+      'Vitamins and Supplements',
+      'First Aid',
+      'Medical Equipment',
+      'ORS and Hydration',
+      'Healthcare Essentials',
+    ];
+
+    let dbCategories = [];
+    try {
+      dbCategories = await Medicine.distinct('category');
+    } catch (e) {
+      // Graceful fallback if database is not yet ready
+    }
+
+    const allCategories = Array.from(new Set([...intendedCategories, ...dbCategories.filter(Boolean)]));
+
     return res.status(200).json({
       success: true,
-      data: categories.filter(Boolean).sort(),
+      data: allCategories,
+      count: allCategories.length,
     });
   } catch (error) {
     next(error);

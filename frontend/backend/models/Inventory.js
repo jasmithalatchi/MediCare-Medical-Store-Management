@@ -56,5 +56,5 @@ inventorySchema.virtual('isLowStock').get(function () {
   return this.currentStock <= this.reorderLevel;
 });
 
-const Inventory = mongoose.model('Inventory', inventorySchema);
+const Inventory = mongoose.models.Inventory || mongoose.model('Inventory', inventorySchema);
 export default Inventory;

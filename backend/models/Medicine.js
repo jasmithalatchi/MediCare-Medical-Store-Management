@@ -105,5 +105,5 @@ medicineSchema.virtual('finalPrice').get(function () {
   return this.originalPrice || 0;
 });
 
-const Medicine = mongoose.model('Medicine', medicineSchema);
+const Medicine = mongoose.models.Medicine || mongoose.model('Medicine', medicineSchema);
 export default Medicine;

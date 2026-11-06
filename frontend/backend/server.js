@@ -10,6 +10,8 @@ import { fileURLToPath } from 'url';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import medicineRoutes from './routes/medicineRoutes.js';
+import { getCategories } from './controllers/medicineController.js';
+import { seedDatabase } from './controllers/seedController.js';
 import orderRoutes from './routes/orderRoutes.js';
 import inventoryRoutes from './routes/inventoryRoutes.js';
 import userRoutes from './routes/userRoutes.js';
@@ -90,7 +92,9 @@ app.use(async (req, res, next) => {
         req.originalUrl !== '/api' &&
         req.originalUrl !== '/api/' &&
         !req.originalUrl.startsWith('/api/health') &&
-        !req.originalUrl.startsWith('/health')
+        !req.originalUrl.startsWith('/health') &&
+        !req.originalUrl.startsWith('/api/categories') &&
+        !req.originalUrl.startsWith('/categories')
       ) {
         return res.status(503).json({
           success: false,
@@ -140,9 +144,11 @@ app.get(['/api', '/api/status'], (req, res) => {
     version: '1.0.0',
     endpoints: {
       health: '/api/health',
-      auth: '/api/auth',
+      categories: '/api/categories',
       medicines: '/api/medicines',
       products: '/api/products',
+      seed: '/api/seed',
+      auth: '/api/auth',
       orders: '/api/orders',
       inventory: '/api/inventory',
       users: '/api/users',
@@ -167,6 +173,8 @@ app.get('/', (req, res) => {
 });
 
 // Mount API Routes (supports both /api/* and /* for Vercel Serverless Function rewrites)
+app.get(['/api/categories', '/categories'], getCategories);
+app.all(['/api/seed', '/seed'], seedDatabase);
 app.use(['/api/auth', '/auth'], authRoutes);
 app.use(['/api/medicines', '/medicines', '/api/products', '/products'], medicineRoutes);
 app.use(['/api/orders', '/orders'], orderRoutes);
