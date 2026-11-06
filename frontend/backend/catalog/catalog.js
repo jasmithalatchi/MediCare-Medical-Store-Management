@@ -17,6 +17,8 @@ const brands = [
   'Piramal Pharma Demo'
 ];
 
+let productCounter = 0;
+
 const createProduct = ({
   name,
   genericName,
@@ -31,11 +33,14 @@ const createProduct = ({
   desc,
   imageUrl,
 }) => {
+  productCounter++;
+  const hexId = '6633' + String(productCounter).padStart(20, '0');
   const brand = brands[brandIdx % brands.length];
   const orig = originalPrice || Math.round(price * 1.25);
   const discount = Math.round(((orig - price) / orig) * 100);
 
   return {
+    _id: hexId,
     name: `${name} (Demo)`,
     genericName,
     brand,

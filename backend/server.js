@@ -89,12 +89,17 @@ app.use(async (req, res, next) => {
     } catch (err) {
       // If DB is disconnected and user calls a data endpoint (not /api/health or /api), return clean 503 message
       if (
+        req.method !== 'GET' &&
         req.originalUrl !== '/api' &&
         req.originalUrl !== '/api/' &&
         !req.originalUrl.startsWith('/api/health') &&
         !req.originalUrl.startsWith('/health') &&
         !req.originalUrl.startsWith('/api/categories') &&
-        !req.originalUrl.startsWith('/categories')
+        !req.originalUrl.startsWith('/categories') &&
+        !req.originalUrl.startsWith('/api/products') &&
+        !req.originalUrl.startsWith('/products') &&
+        !req.originalUrl.startsWith('/api/medicines') &&
+        !req.originalUrl.startsWith('/medicines')
       ) {
         return res.status(503).json({
           success: false,

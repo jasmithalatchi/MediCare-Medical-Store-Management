@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import Loader from '../components/Loader';
 import medicineService from '../services/medicineService';
@@ -22,11 +23,15 @@ const STATIC_CATEGORIES = [
 ];
 
 const Catalogue = () => {
+  const [searchParams] = useSearchParams();
+  const initialCat = searchParams.get('category') || 'All';
+  const initialKw = searchParams.get('search') || searchParams.get('keyword') || '';
+
   const [medicines, setMedicines] = useState([]);
   const [categories, setCategories] = useState(STATIC_CATEGORIES);
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const [searchInput, setSearchInput] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(initialCat);
+  const [searchKeyword, setSearchKeyword] = useState(initialKw);
+  const [searchInput, setSearchInput] = useState(initialKw);
   const [sortOption, setSortOption] = useState('');
   const [inStockOnly, setInStockOnly] = useState(false);
   const [page, setPage] = useState(1);
@@ -34,6 +39,21 @@ const Catalogue = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  // Sync with URL query parameters
+  useEffect(() => {
+    const cat = searchParams.get('category');
+    if (cat) {
+      setSelectedCategory(cat);
+      setPage(1);
+    }
+    const kw = searchParams.get('search') || searchParams.get('keyword');
+    if (kw !== null && kw !== undefined) {
+      setSearchKeyword(kw);
+      setSearchInput(kw);
+      setPage(1);
+    }
+  }, [searchParams]);
 
   // Fetch dynamic categories on mount
   useEffect(() => {

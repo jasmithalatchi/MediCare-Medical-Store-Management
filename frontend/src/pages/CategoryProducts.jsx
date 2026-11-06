@@ -5,12 +5,47 @@ import Loader from '../components/Loader';
 import medicineService from '../services/medicineService';
 import { ArrowLeft } from 'lucide-react';
 
+const normalizeCategory = (slug) => {
+  if (!slug) return '';
+  const clean = decodeURIComponent(slug).trim();
+  const map = {
+    'tablets': 'Tablets',
+    'capsules': 'Capsules',
+    'syrups': 'Syrups and Tonics',
+    'tonics': 'Syrups and Tonics',
+    'syrups-and-tonics': 'Syrups and Tonics',
+    'syrups and tonics': 'Syrups and Tonics',
+    'injections': 'Injections',
+    'serums': 'Serums',
+    'baby-care': 'Baby Care',
+    'baby care': 'Baby Care',
+    'personal-care': 'Personal Care',
+    'personal care': 'Personal Care',
+    'skin-care': 'Skin Care',
+    'skin care': 'Skin Care',
+    'vitamins': 'Vitamins and Supplements',
+    'supplements': 'Vitamins and Supplements',
+    'vitamins-and-supplements': 'Vitamins and Supplements',
+    'vitamins and supplements': 'Vitamins and Supplements',
+    'first-aid': 'First Aid',
+    'first aid': 'First Aid',
+    'medical-equipment': 'Medical Equipment',
+    'medical equipment': 'Medical Equipment',
+    'ors': 'ORS and Hydration',
+    'ors-and-hydration': 'ORS and Hydration',
+    'ors and hydration': 'ORS and Hydration',
+    'healthcare-essentials': 'Healthcare Essentials',
+    'healthcare essentials': 'Healthcare Essentials',
+  };
+  return map[clean.toLowerCase()] || clean;
+};
+
 const CategoryProducts = () => {
   const { categoryName } = useParams();
   const [medicines, setMedicines] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const decodedCategory = decodeURIComponent(categoryName || '');
+  const decodedCategory = normalizeCategory(categoryName || '');
 
   useEffect(() => {
     const fetchCategoryMedicines = async () => {
